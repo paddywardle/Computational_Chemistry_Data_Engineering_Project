@@ -4,20 +4,12 @@ import requests
 class HTTPRequests():
 
     def __init__(self):
-        self.session = ''
-
-    def create_session(self):
-
         self.session = requests.Session()
 
     def get(self, url, **kwargs):
 
         try:
-            if self.session != '':
-                response = self.session.get(url, kwargs)
-                response.raise_for_status()
-                return response
-            response = requests.get(url, kwargs)
+            response = self.session.get(url, **kwargs)
             response.raise_for_status()
             return response
         except requests.exceptions.HTTPError as errh:
@@ -28,19 +20,13 @@ class HTTPRequests():
             print(errt)
         except requests.exceptions.RequestException as err:
             print(err)
-        except:
-            print("Other error")
 
     def put(self, url, **kwargs):
 
         try:
-            if self.session != '':
-                response = self.session.put(url, kwargs)
-                response.raise_for_status()
-                return response
-            response = requests.put(url, kwargs)
-            return response
+            response = self.session.put(url, kwargs)
             response.raise_for_status()
+            return response
         except requests.exceptions.HTTPError as errh:
             print(errh)
         except requests.exceptions.ConnectionError as errc:
@@ -55,13 +41,9 @@ class HTTPRequests():
     def post(self, url, **kwargs):
 
         try:
-            if self.session != '':
-                response = self.session.post(url, kwargs)
-                response.raise_for_status()
-                return response
-            response = requests.post(url, kwargs)
-            return response
+            response = self.session.post(url, kwargs)
             response.raise_for_status()
+            return response
         except requests.exceptions.HTTPError as errh:
             print(errh)
         except requests.exceptions.ConnectionError as errc:
