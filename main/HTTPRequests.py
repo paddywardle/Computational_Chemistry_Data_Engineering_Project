@@ -17,9 +17,9 @@ class HTTPRequests():
                 response = self.session.get(url, kwargs)
                 response.raise_for_status()
                 return response
-            response = response.get(url, kwargs)
-            return response
+            response = requests.get(url, kwargs)
             response.raise_for_status()
+            return response
         except requests.exceptions.HTTPError as errh:
             print(errh)
         except requests.exceptions.ConnectionError as errc:
@@ -38,7 +38,7 @@ class HTTPRequests():
                 response = self.session.put(url, kwargs)
                 response.raise_for_status()
                 return response
-            response = response.put(url, kwargs)
+            response = requests.put(url, kwargs)
             return response
             response.raise_for_status()
         except requests.exceptions.HTTPError as errh:
@@ -59,7 +59,7 @@ class HTTPRequests():
                 response = self.session.post(url, kwargs)
                 response.raise_for_status()
                 return response
-            response = response.post(url, kwargs)
+            response = requests.post(url, kwargs)
             return response
             response.raise_for_status()
         except requests.exceptions.HTTPError as errh:
@@ -72,25 +72,3 @@ class HTTPRequests():
             print(err)
         except:
             print("Other error")
-
-    def post(self, url, **kwargs):
-
-        try:
-            if self.session != '':
-                response = self.session.post(url, kwargs)
-                response.raise_for_status()
-                return response
-            response = response.post(url, kwargs)
-            return response
-            response.raise_for_status()
-        except requests.exceptions.HTTPError as errh:
-            print(errh)
-        except requests.exceptions.ConnectionError as errc:
-            print(errc)
-        except requests.exceptions.Timeout as errt:
-            print(errt)
-        except requests.exceptions.RequestException as err:
-            print(err)
-        except:
-            print("Other error")
-
