@@ -76,7 +76,7 @@ class CreateDB:
         except Error as e:
             print(e)
 
-    def write_df(self, db_name, df):
+    def write_df(self, table_name, db_name, df):
         
         try:
             engine = create_engine("mysql+pymysql://{user}:{password}@{host}/{db}".format(user=self.user, host=self.host, password=self.password, db=db_name))
