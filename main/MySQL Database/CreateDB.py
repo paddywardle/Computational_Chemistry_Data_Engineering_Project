@@ -1,6 +1,9 @@
+from venv import create
 from mysql.connector import connect, Error
+from sqlalchemy import create_engine
+import pymysql
 
-class creating_db:
+class CreateDB:
 
     def __init__(self, user, password, host='localhost'):
 
@@ -53,7 +56,7 @@ class creating_db:
             ) as connection:
                 with connection.cursor() as cursor:
                     cursor.execute(commit_query)
-                    cursor.commit()
+                    connection.commit()
         except Error as e:
             print(e)
 
@@ -70,6 +73,16 @@ class creating_db:
                     cursor.execute(fetch_query)
                     result = cursor.fetchall()
                     return result
+        except Error as e:
+            print(e)
+
+    def write_df(self, db_name, df):
+        
+        try:
+            engine = create_engine("mysql+pymysql://{user}:{password}@{host}/{db}".format(user=self.user, host=self.host, password=self.password, db=db_name))
+
+            df.to_sql(db_name, engine, if_exists="append", index=False)
+        
         except Error as e:
             print(e)
 
