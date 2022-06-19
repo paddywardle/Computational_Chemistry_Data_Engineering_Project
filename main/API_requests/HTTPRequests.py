@@ -24,7 +24,7 @@ class HTTPRequests():
     def put(self, url, **kwargs):
 
         try:
-            response = self.session.put(url, kwargs)
+            response = self.session.put(url, **kwargs)
             response.raise_for_status()
             return response
         except requests.exceptions.HTTPError as errh:
@@ -41,7 +41,7 @@ class HTTPRequests():
     def post(self, url, **kwargs):
 
         try:
-            response = self.session.post(url, kwargs)
+            response = self.session.post(url, **kwargs)
             response.raise_for_status()
             return response
         except requests.exceptions.HTTPError as errh:
