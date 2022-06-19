@@ -10,6 +10,8 @@ if __name__ == "__main__":
 
     db_name = input("Enter Database Name: ")
 
+    table_name = input("Enter Table Name: ")
+
     json_path = "../../raw_data/pubchem_raw_data.json"
 
     df = pd.read_json(json_path)
@@ -18,7 +20,7 @@ if __name__ == "__main__":
 
     db = CreateDB(user, password)
 
-    db.write_df(db_name, df)
+    db.write_df(table_name, db_name, df)
 
 
 
