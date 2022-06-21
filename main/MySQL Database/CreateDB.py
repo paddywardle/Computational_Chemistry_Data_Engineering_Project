@@ -81,7 +81,7 @@ class CreateDB:
         try:
             engine = create_engine("mysql+pymysql://{user}:{password}@{host}/{db}".format(user=self.user, host=self.host, password=self.password, db=db_name))
 
-            df.to_sql(db_name, engine, if_exists="append", index=False)
+            df.to_sql(table_name, engine, if_exists="append", index=False)
         
         except Error as e:
             print(e)
