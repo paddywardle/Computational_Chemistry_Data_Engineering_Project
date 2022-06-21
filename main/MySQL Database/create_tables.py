@@ -10,7 +10,7 @@ if __name__ == "__main__":
     db_name = input("Enter Database Name: ")
 
     create_query = f"""
-    CREATE TABLE pubchem_data(
+    CREATE TABLE properties(
         id INT AUTO_INCREMENT PRIMARY KEY,
         cid INT,
         MolecularFormula TEXT,
