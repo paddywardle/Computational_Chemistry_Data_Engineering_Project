@@ -25,6 +25,7 @@ numpy==1.22.4
 packaging==21.3
 pandas==1.4.2
 parso==0.8.3
+pathlib==1.0.1
 pickleshare==0.7.5
 Pillow==9.1.1
 prompt-toolkit==3.0.29
@@ -47,6 +48,7 @@ sparksql-magic==0.0.3
 SQLAlchemy==1.4.37
 stack-data==0.3.0
 threadpoolctl==3.1.0
+tqdm==4.64.0
 traitlets==5.3.0
 urllib3==1.26.9
 wcwidth==0.2.5
