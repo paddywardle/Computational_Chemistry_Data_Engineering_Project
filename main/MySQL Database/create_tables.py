@@ -53,14 +53,16 @@ if __name__ == "__main__":
         EffectiveRotorCount3D FLOAT,
         ConformerCount3D INT,
         Fingerprint2D TEXT,
-        Title TEXT
+        Title TEXT,
+        UNIQUE (cid)
     )
     """
 
     image_create_query = """
     CREATE TABLE images(
         cid INT AUTO_INCREMENT PRIMARY KEY,
-        image BLOB
+        image BLOB,
+        UNIQUE (cid)
     )
     """
 
