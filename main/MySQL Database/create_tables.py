@@ -9,7 +9,7 @@ if __name__ == "__main__":
 
     db_name = input("Enter Database Name: ")
 
-    create_query = f"""
+    property_create_query = """
     CREATE TABLE properties(
         id INT AUTO_INCREMENT PRIMARY KEY,
         cid INT,
@@ -57,6 +57,15 @@ if __name__ == "__main__":
     )
     """
 
+    image_create_query = """
+    CREATE TABLE images(
+        cid INT AUTO_INCREMENT PRIMARY KEY,
+        image BLOB
+    )
+    """
+
     db = CreateDB(user, password)
 
-    db.commit_query(db_name, create_query)
+    db.commit_query(db_name, property_create_query)
+
+    db.commit_query(db_name, image_create_query)
