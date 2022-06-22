@@ -25,6 +25,10 @@ def pubchem_compound_properties_query(num_records, start_cid=1):
     # joining them into a comma-separated string
     properties_string = ','.join(properties)
 
+    columns = [f'pixel_{x}' for x in range(1, 10001)]
+
+    images_array = np.empty((0,0))
+
     # api url with values that can be formatted later
     for i in tqdm(range(start_cid, num_records+1)):
 
@@ -34,27 +38,23 @@ def pubchem_compound_properties_query(num_records, start_cid=1):
 
         properties_response = api_class.get(properties_url)
 
-        images_properties = api_class.get(images_url)
+        images_response = api_class.get(images_url)
 
         properties_json = properties_response.json()
 
-        image = Image.open(BytesIO(images_properties.content))
+        image = BytesIO(images_response.content)
 
-        pxls = np.array(image.getdata())
+        images_array = np.append(images_array, image)
 
         if i == start_cid:
             properties_df = pd.DataFrame(properties_json['PropertyTable']['Properties'])
 
-            images_df = pd.DataFrame(pxls)
-
         else:
             properties_df_other = pd.DataFrame(properties_json['PropertyTable']['Properties'])
 
-            images_df_other = pd.DataFrame(pxls)
-
             properties_df = pd.concat([properties_df, properties_df_other])
-
-            images_df = pd.concat([images_df, images_df_other])
+    
+    images_df = pd.DataFrame(images_array, columns=['image'])
 
     user = input("Input Database User: ")
     password = getpass("Input Database Password: ")
