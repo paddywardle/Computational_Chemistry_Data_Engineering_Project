@@ -70,14 +70,8 @@ def pubchem_compound_properties_query(num_records, start_cid=1, write_to_db='yes
             # response for image database
             images_response = api_class.get(images_url)
 
-            # image bytes object from response
-            image = BytesIO(images_response.content)
-
-            # array with image bytes object
-            images_array = np.array([image])
-
             # images dataframe with single record
-            images_df = pd.DataFrame(images_array, columns=['image'])
+            images_df = pd.DataFrame([images_response.content], columns=['image'])
 
             if write_to_db.upper() == "YES":
 
