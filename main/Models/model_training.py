@@ -3,6 +3,8 @@ import os
 from getpass import getpass
 sys.path.append(os.path.dirname(os.getcwd())+"\\MySQL Database")
 from CreateDB import CreateDB
+from DataloaderCreator import DataloaderCreator
+from ModelTrainEval import ModelTrainEval
 
 import torch
 import torchvision
@@ -32,30 +34,14 @@ if __name__ == "__main__":
 
     labels = db.fetch_query(db_name, labels_query)
 
-    img_list = []
+    # dataloader object to create training and evaluation datasets
+    dataloader = DataloaderCreator(images, labels)
 
-    # iterate though query results and add pixel values to img_list
-    for i in range(len(images)):
-        
-        img_single = list(Image.open(BytesIO(images[i][0])).getdata())
-        
-        img_list.append(img_single)
-        
-    # array of images and reshape for conv net
-    img_array = np.array(img_list).reshape(-1, 100, 100)
+    train_loader, test_loader = dataloader.dataloader_creator(batch_size=4, train_size=0.9)
 
-    # creating pytorch tensor of image data
-    img_tensor = torch.from_numpy(img_array)
+    # ModelTrainEval object to train the model
+    model_trainer = ModelTrainEval()
 
-    # creating numpy array of labels
-    labels_array = np.array([x[0] for x in labels])
+    training_losses = model_trainer.train_net(num_epochs=10, train_loader=train_loader)
 
-    # create pytorch tensor of labels
-    labels_tensor = torch.from_numpy(labels_array)
-
-    # split data into training and testing sets
-    X_train, X_test, y_train, y_test = train_test_split(img_tensor, labels_tensor, train_size=0.8, random_state=0)
-
-    train_dataset = torch.utils.data.TensorDataset(X_train, y_train)
-
-    test_dataset = torch.utils.data.TensorDataset(X_test, y_test)
+    testing_loss = model_trainer.eval(test_loader=test_loader)
