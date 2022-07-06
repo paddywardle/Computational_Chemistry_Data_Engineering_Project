@@ -1,14 +1,16 @@
 from cgi import test
+from typing import List
 import numpy as np
 from io import BytesIO
 from PIL import Image
 import torch
 import torchvision
 from sklearn.model_selection import train_test_split
+from typing import Tuple
 
 class DataloaderCreator:
 
-    def __init__(self, image_data, labels):
+    def __init__(self, image_data: List[str], labels: List[float]) -> torch.Tensor:
 
         self.image_data = image_data
 
@@ -31,7 +33,7 @@ class DataloaderCreator:
 
         return labels_tensor
 
-    def dataloader_creator(self, batch_size, train_size=0.8):
+    def dataloader_creator(self, batch_size: int, train_size: float=0.8) -> Tuple(torch.utils.data.DataLoader,torch.utils.data.DataLoader):
 
         img_tensor = self.create_pixel_tensor()
 

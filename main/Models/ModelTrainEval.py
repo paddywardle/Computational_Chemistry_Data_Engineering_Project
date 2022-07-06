@@ -2,6 +2,7 @@ from Net import Net
 import torch
 import torch.nn as nn
 import torch.optim as optim
+from typing import List
 from pathlib import Path
 import os
 
@@ -13,7 +14,7 @@ class ModelTrainEval:
         self.criterion = nn.MSELoss()
         self.optimizer = optim.Adam(self.net.parameters(), lr=0.001)
 
-    def train_net(self, num_epochs, train_loader):
+    def train_net(self, num_epochs: int, train_loader: torch.utils.data.DataLoader) -> List[float]:
 
         self.net.train()
         
@@ -53,7 +54,7 @@ class ModelTrainEval:
                     
         print('Finished Training')
 
-    def eval(self, test_loader):
+    def eval(self, test_loader: torch.utils.data.DataLoader) -> float:
         
         self.net.eval()
         
@@ -73,7 +74,7 @@ class ModelTrainEval:
         
         return test_loss_total/(len(test_loader) * test_loader.batch_size)
 
-    def save_model(self, model_name):
+    def save_model(self, model_name: str):
 
         model_path = Path(os.getcwd()) / "Models" / f"{model_name}.pth".format(model_name)
 

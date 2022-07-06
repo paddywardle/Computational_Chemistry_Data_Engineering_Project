@@ -6,7 +6,7 @@ class HTTPRequests():
     def __init__(self):
         self.session = requests.Session()
 
-    def get(self, url, **kwargs):
+    def get(self, url: str, **kwargs):
 
         try:
             response = self.session.get(url, **kwargs)
@@ -21,7 +21,7 @@ class HTTPRequests():
         except requests.exceptions.RequestException as err:
             print(err)
 
-    def put(self, url, **kwargs):
+    def put(self, url: str, **kwargs):
 
         try:
             response = self.session.put(url, **kwargs)
@@ -38,7 +38,7 @@ class HTTPRequests():
         except:
             print("Other error")
 
-    def post(self, url, **kwargs):
+    def post(self, url: str, **kwargs):
 
         try:
             response = self.session.post(url, **kwargs)

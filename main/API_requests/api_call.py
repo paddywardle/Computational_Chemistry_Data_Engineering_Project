@@ -12,7 +12,7 @@ import lxml
 sys.path.append(os.path.dirname(os.getcwd())+"\\MySQL Database")
 from CreateDB import CreateDB
 
-def pubchem_compound_properties_query(num_records, start_cid=1, write_to_db='yes'):
+def pubchem_compound_properties_query(num_records: int, start_cid: int=1, write_to_db: str='yes') -> int:
 
     if write_to_db.upper() == "YES":
     

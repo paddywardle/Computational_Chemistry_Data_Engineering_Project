@@ -1,11 +1,14 @@
+from typing import List
 from venv import create
 from mysql.connector import connect, Error
 from sqlalchemy import create_engine
 import pymysql
+import pandas as pd
+from typing import List
 
 class CreateDB:
 
-    def __init__(self, user, password, host='localhost'):
+    def __init__(self, user: str, password: str, host: str='localhost'):
 
         self.host = host
         self.user = user
@@ -31,7 +34,7 @@ class CreateDB:
         except Error as e:
             print(e)
 
-    def create_db(self, db_name):
+    def create_db(self, db_name: str):
 
         try:
             with connect(
@@ -45,7 +48,7 @@ class CreateDB:
         except Error as e:
             print(e)
     
-    def commit_query(self, db_name, commit_query):
+    def commit_query(self, db_name: str, commit_query: str):
 
         try:
             with connect(
@@ -60,7 +63,7 @@ class CreateDB:
         except Error as e:
             print(e)
 
-    def fetch_query(self, db_name, fetch_query):
+    def fetch_query(self, db_name: str, fetch_query: str) -> List:
 
         try:
             with connect(
@@ -76,7 +79,7 @@ class CreateDB:
         except Error as e:
             print(e)
 
-    def write_df(self, table_name, db_name, df):
+    def write_df(self, table_name: str, db_name: str, df: pd.DataFrame):
         
         try:
             engine = create_engine("mysql+pymysql://{user}:{password}@{host}/{db}".format(user=self.user, host=self.host, password=self.password, db=db_name))
@@ -85,7 +88,6 @@ class CreateDB:
         
         except Error as e:
             print(e)
-
 
 
 

@@ -17,7 +17,7 @@ class Net(nn.Module):
         self.fc2 = nn.Linear(100, 50)
         self.fc3 = nn.Linear(50, 1)
         
-    def forward(self, x):
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
         x = self.dropout1(x)
         x = self.conv1(x)
         x = self.batchnorm1(x)
