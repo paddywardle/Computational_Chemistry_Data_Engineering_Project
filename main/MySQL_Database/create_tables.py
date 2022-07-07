@@ -1,13 +1,14 @@
 from CreateDB import CreateDB
 from getpass import getpass
+from main.config import configuration_dict
 
 if __name__ == "__main__":
 
-    user = input("Enter Database Username: ")
+    user = configuration_dict['user']
 
-    password = getpass("Enter Database Password: ")
+    password = configuration_dict['password']
 
-    db_name = input("Enter Database Name: ")
+    db_name = configuration_dict['db_name']
 
     property_create_query = """
     CREATE TABLE properties(
