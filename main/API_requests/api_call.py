@@ -1,24 +1,18 @@
 from HTTPRequests import HTTPRequests
-from PIL import Image
-from io import BytesIO
 import pandas as pd
-import numpy as np
-import sys
-import os
-from getpass import getpass
 from tqdm import tqdm
 from bs4 import BeautifulSoup
 import lxml
-sys.path.append(os.path.dirname(os.getcwd())+"\\MySQL Database")
-from CreateDB import CreateDB
+from MySQL_Database.CreateDB import CreateDB
+from main.config import configuration_dict
 
 def pubchem_compound_properties_query(num_records: int, start_cid: int=1, write_to_db: str='yes') -> int:
 
     if write_to_db.upper() == "YES":
     
-        user = input("Input Database User: ")
-        password = getpass("Input Database Password: ")
-        database = input("Input Database Name: ")
+        user = configuration_dict['user']
+        password = configuration_dict['password']
+        database = configuration_dict['db_name']
 
         # writing to MySQL database
         db_instance = CreateDB(user, password)

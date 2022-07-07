@@ -1,19 +1,7 @@
-import sys
-import os
 from getpass import getpass
-sys.path.append(os.path.dirname(os.getcwd())+"\\MySQL Database")
-from CreateDB import CreateDB
+from MySQL_Database.CreateDB import CreateDB
 from DataloaderCreator import DataloaderCreator
 from ModelTrainEval import ModelTrainEval
-
-import torch
-import torchvision
-
-from io import BytesIO
-from PIL import Image
-
-import numpy as np
-from sklearn.model_selection import train_test_split
 
 if __name__ == "__main__":
 
