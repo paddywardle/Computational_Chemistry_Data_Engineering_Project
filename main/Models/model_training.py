@@ -1,13 +1,13 @@
-from getpass import getpass
 from MySQL_Database.CreateDB import CreateDB
 from DataloaderCreator import DataloaderCreator
 from ModelTrainEval import ModelTrainEval
+from main.config import configuration_dict
 
 if __name__ == "__main__":
 
-    user = input("Enter username: ")
-    password = getpass("Enter password: ")
-    db_name = input("Enter database name: ")
+    user = configuration_dict['user']
+    password = configuration_dict['password']
+    db_name = configuration_dict['db_name']
 
     # query for image data
     img_query = "SELECT image FROM images"
