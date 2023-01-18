@@ -1,4 +1,4 @@
-# Computational_Chemsitry_Data_Engineering_Project
+# Computational_Chemistry_Data_Engineering_Project
 - The purpose of this project is to learn more about data engineering (API requests, SQL databases and data preprocessing). 
 - Using the data a pytorch convolutional network was then trained.
 
